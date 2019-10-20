@@ -1,6 +1,7 @@
 # Source of data
 
 * `data/UTKFace/`
+
 [UTKFace | Large Scale Face Dataset](https://susanqq.github.io/UTKFace/)
 
 Related:
@@ -15,8 +16,11 @@ Related:
 ```
 
 * `data/Image/`
+
 [Learning Hybrid image Templates (HiT) by Information Projection](http://www.stat.ucla.edu/~zzsi/HiT/exp5.html)
 
 * `data/scenery/`
+
 [Landscape Picture Ideas for Free - Pixabay](https://pixabay.com/images/search/landscape/)
-Randomly picked from it
+
+Randomly picked 
