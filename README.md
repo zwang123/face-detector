@@ -14,4 +14,12 @@ Accuracy is as high as 98%
 ## Usage
 Run `./run.sh` to learn a face detector
 
+## Details
+* [UTKFace Dataset](https://susanqq.github.io/UTKFace/) was used to train face
+images
+* Random scenery pictures were used to train non-face images
+* An independent [LHI-Animal-Faces](http://www.stat.ucla.edu/~zzsi/HiT/exp5.html) dataset was used as part of the test set
+* In the test set, non-face images are more than images with faces to simulate
+a actual picture where most of the windows do no contain a face
+
 Note that the sample/test division is random, so the accuracy could fluctuate

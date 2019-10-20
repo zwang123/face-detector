@@ -13,8 +13,6 @@ _________________________________________________________________
 flatten (Flatten)            (None, 7744)              0
 _________________________________________________________________
 dense (Dense)                (None, 2)                 15490
-_________________________________________________________________
-activation (Activation)      (None, 2)                 0
 =================================================================
 Total params: 34,882
 Trainable params: 34,882
@@ -22,15 +20,14 @@ Non-trainable params: 0
 _________________________________________________________________
 Train on 25855 samples, validate on 10493 samples
 Epoch 1/5
-25855/25855 [==============================] - 28s 1ms/sample - loss: 0.1798 - accuracy: 0.9736 - val_loss: 0.5461 - val_accuracy: 0.9637
+25855/25855 [==============================] - 29s 1ms/sample - loss: 0.0516 - accuracy: 0.9849 - val_loss: 0.1767 - val_accuracy: 0.9564
 Epoch 2/5
-25855/25855 [==============================] - 28s 1ms/sample - loss: 0.1475 - accuracy: 0.9962 - val_loss: 0.5181 - val_accuracy: 0.9804
+25855/25855 [==============================] - 29s 1ms/sample - loss: 0.0175 - accuracy: 0.9971 - val_loss: 0.5959 - val_accuracy: 0.8558
 Epoch 3/5
-25855/25855 [==============================] - 28s 1ms/sample - loss: 0.1455 - accuracy: 0.9971 - val_loss: 0.5202 - val_accuracy: 0.9792
+25855/25855 [==============================] - 28s 1ms/sample - loss: 0.0131 - accuracy: 0.9984 - val_loss: 0.1279 - val_accuracy: 0.9773
 Epoch 4/5
-25855/25855 [==============================] - 27s 1ms/sample - loss: 0.1441 - accuracy: 0.9978 - val_loss: 0.6087 - val_accuracy: 0.9304
+25855/25855 [==============================] - 27s 1ms/sample - loss: 0.0125 - accuracy: 0.9980 - val_loss: 0.3209 - val_accuracy: 0.9248
 Epoch 5/5
-25855/25855 [==============================] - 27s 1ms/sample - loss: 0.1435 - accuracy: 0.9979 - val_loss: 0.5256 - val_accuracy: 0.9776
-10493/1 - 3s - loss: 0.6115 - accuracy: 0.9776
-0.9776041
-
+25855/25855 [==============================] - 27s 1ms/sample - loss: 0.0110 - accuracy: 0.9986 - val_loss: 0.1329 - val_accuracy: 0.9839
+10493/1 - 3s - loss: 0.0700 - accuracy: 0.9839
+test accuracy 0.98389405

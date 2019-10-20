@@ -13,6 +13,8 @@ from scipy.ndimage import zoom
 
 def sample_images(img, lbl, ratio=5):
 
+    """ Divide the images into a training set and a test set """
+
     n = len(img)
     tmask = np.array(random.sample(range(n), n // (ratio+1)), dtype=int)
     #np.save("tmask", tmask)
@@ -44,8 +46,6 @@ def load_zoom(idx, fnames, saved=False,
                 fig = plt.imread(fname)
                 fig = (zoom(fig, (piecesize/fig.shape[0],
                     piecesize/fig.shape[1], 1)))
-                #if not (fig.shape[0] == piecesize and fig.shape[1] ==
-                #        piecesize and fig.shape[2] == ):
                 if not (fig.shape == (piecesize, piecesize, 3)):
                     print("zoom", fname, fig.shape)
                 #plt.imshow(fig)
@@ -92,7 +92,7 @@ def extract_figures(idx, fnames, saved=False,
                            continue
                     img.append(fig[xpos:xpos+piecesize, ypos:ypos+piecesize, :])
             except:
-                print(fname)
+                print("except", fname)
                 pass
 
         img = np.array(img, ndmin=4, dtype=img[0].dtype)
@@ -107,22 +107,18 @@ def load_data(idx, fnames, saved=False,
 
     """ Load data from npy or from images and filter through a Pool layer """
 
-    #print(idx, fnames, saved)
-
     imgname = '{}{}.npy'.format(savepre['img'], idx)
     img4name = '{}{}.npy'.format(savepre['img4'], idx)
     lblname = '{}{}.npy'.format(savepre['lbl'], idx)
 
     if saved:
         img4 = np.load(img4name)
-        #lbl = np.load(lblname)
         try:
             lbl = np.load(lblname)
         except:
             for fname in fnames:
                 if len(parse_filename(fname)) != 5:
-                    print(fname)
-            #print(idx, fnames, saved)
+                    print("parse", fname)
             raise
     else:
         img = []
@@ -133,7 +129,7 @@ def load_data(idx, fnames, saved=False,
                 img.append(plt.imread(fname))
                 finished = True
             except:
-                print(fname)
+                print("except", fname)
                 pass
             if finished:
                 lbl.append(parse_filename(fname))
@@ -143,8 +139,6 @@ def load_data(idx, fnames, saved=False,
         img = np.array(img, ndmin=4, dtype=img[0].dtype)
         lbl = np.array(lbl, ndmin=2, dtype=lbl[0].dtype)
         img4 = pool(img).numpy()
-
-        #print(img.shape, lbl.shape, img4.shape)
 
         np.save(imgname, img)
         np.save(img4name, img4)
@@ -163,28 +157,19 @@ def load_data(idx, fnames, saved=False,
 
     #print(img[0, :8, :8, 0])
     #print(img4[0, :2, :2, 0])
-    #return
 
     return img4, lbl
 
 def divide_chunks(arr, chunksize):
+    """ divide arr into chunks of chunksize """
     for i in range(0, len(arr), chunksize):
         yield arr[i:i + chunksize]
 
-#class ParamPasser:
-#    def __init__(paramlist, paramdict={}, args=[], kwargs={}):
-#        self._paramlist = paramlist
-#        self._paramdict = paramdict
-#        self._args = args
-#        self._kwargs = kwargs
-#
-#    def 
-
-#def rev_map(x):
-#    return 
-
 def load_scenery_from_folder(data_folder = './data/scenery/', saved=False,
         batch=8, **kwargs):
+
+    """ load images from a folder and return only image data 
+    with labels fixed at 0"""
 
     fnames = glob(data_folder + '*')
 
@@ -194,7 +179,7 @@ def load_scenery_from_folder(data_folder = './data/scenery/', saved=False,
 
     img = np.concatenate(img)
 
-    print(img.shape)
+    print("img", img.shape)
 
     n = len(img)
     
@@ -205,33 +190,23 @@ def load_data_from_folder(data_folder = './data/UTKFace/', saved=False,
         batch=512, **kwargs):
         #batch=1024, *args, **kwargs):
 
+    """ load images from a folder and return image data as well as labels """
+
     fnames = glob(data_folder + '*')
 
-    #def f(x):
-    #    return load_data(x[1], x[0], saved, *args, **kwargs)
-
-    #x + (saved, *for x in enumerate(divide_chunks(fnames, batch))
-
     with mp.Pool() as p:
-        #img, lbl = zip(p.imap_unordered(f, list(enumerate(divide_chunks(fnames, batch)))))
         rtn = (p.starmap(partial(load_fxn, saved=saved, **kwargs), 
             enumerate(divide_chunks(fnames, batch))))
 
     img, lbl = zip(*rtn)
 
-    #print(len(lbl))
-    #for idx, xxx in enumerate(lbl):
-    #    print(idx, xxx.shape)
-
     img = np.concatenate(img)
     lbl = np.concatenate(lbl)
 
-    print(img.shape)
-    print(lbl.shape)
+    print("img", img.shape)
+    print("lbl", lbl.shape)
 
-    #return sample_images(img, lbl, ratio=5)
     return img, lbl
-
 
 
 def parse_filename(fname):
@@ -245,7 +220,6 @@ if __name__ == '__main__':
     #print(parse_filename(targetName))
     #load_data_from_folder('data/ddd/')
     #load_data_from_folder()
-    #load_data_from_folder(saved=True)
     #load_data_from_folder(saved=True)
     #load_data(0, glob('data/ddd/*'), True)
     load_zoom(0, glob('data/Image/*/*'), False)
