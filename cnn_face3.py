@@ -13,6 +13,7 @@ from image_reader import load_zoom
 from image_reader import sample_images
 
 import numpy as np
+from random import sample
 
 img, lbl = load_data_from_folder(saved=True)
 lbl = lbl[:, :1]
@@ -43,22 +44,34 @@ print("test labels", test_labels.shape)
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = train_images / 255.0, test_images / 255.0
 
-##Verify the data
-##class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
-##               'dog', 'frog', 'horse', 'ship', 'truck']
-#class_names = ['nonface', 'face']
-#
-#plt.figure(figsize=(10,10))
-#for i in range(25):
-#    plt.subplot(5,5,i+1)
-#    plt.xticks([])
-#    plt.yticks([])
-#    plt.grid(False)
-#    plt.imshow(train_images[i], cmap=plt.cm.binary)
-#    # The CIFAR labels happen to be arrays,
-#    # which is why you need the extra index
-#    plt.xlabel(class_names[train_labels[i][0]])
-#plt.show()
+#Verify the data
+class_names = ['nonface', 'face']
+
+plt.figure(figsize=(10,10))
+for iplot, i in enumerate(sample(range(len(train_images)), 25)):
+    plt.subplot(5,5,iplot+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i], cmap=plt.cm.binary)
+    # The CIFAR labels happen to be arrays,
+    # which is why you need the extra index
+    plt.xlabel(class_names[train_labels[i][0]])
+plt.savefig("sample_training_set.png")
+plt.clf()
+
+plt.figure(figsize=(10,10))
+for iplot, i in enumerate(sample(range(len(test_images)), 25)):
+    plt.subplot(5,5,iplot+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(test_images[i], cmap=plt.cm.binary)
+    # The CIFAR labels happen to be arrays,
+    # which is why you need the extra index
+    plt.xlabel(class_names[test_labels[i][0]])
+plt.savefig("sample_test_set.png")
+plt.clf()
 
 #Create the convolutional base
 model = models.Sequential()

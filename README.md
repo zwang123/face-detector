@@ -1,7 +1,8 @@
 # Face Detector using CNN
 
 A simple face detector (MD) trained from convolutional neural network (CNN).
-Accuracy is as high as 98%
+Accuracy is as high as 98%, the trained model can distinguish human faces from
+animal faces without having any animal faces in the training set.
 
 ## Prerequisites
 * [Python3](https://www.python.org/) (tested on Python 3.7.4)
@@ -19,6 +20,8 @@ Run `./run.sh` to learn a face detector
 images
 * Random scenery pictures were used to train non-face images
 * An independent [LHI-Animal-Faces](http://www.stat.ucla.edu/~zzsi/HiT/exp5.html) dataset was used as part of the test set
+* Animal faces are added to the validation set to see if the trained model
+misclassify them as human faces
 * In the test set, non-face images are more than images with faces to simulate
 a actual picture where most of the windows do no contain a face
 
