@@ -15,6 +15,8 @@ animal faces without having any animal faces in the training set.
 ## Usage
 Run `./run.sh` to learn a face detector
 
+Run `python3 cnn_gender.py` to learn train a gender model
+
 ## Details
 * [UTKFace Dataset](https://susanqq.github.io/UTKFace/) was used to train face
 images
